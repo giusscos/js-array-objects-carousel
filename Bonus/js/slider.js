@@ -72,8 +72,8 @@ function createList(){
 
 	for(let key in slides){
 		const value = slides[key];
-	
-		const listItem = createListItem(parseInt(key), value.url, value.title, value.description);
+		const index = parseInt(key);
+		const listItem = createListItem(index, value.url, value.title, value.description);
 		slideArrayElement.push(listItem);
 		unListEl.append(listItem);
 	}
@@ -125,7 +125,6 @@ function prevSlide(){
     slideNextEl.classList.add('active');
 }
 
-
 const slideArrayElement = [];
 let counter = 0;
 let slideCurrentEl, slideNextEl;
@@ -144,4 +143,3 @@ const prevSlideEl = document.querySelector('.arrow-prev');
 
 nextSlideEl.addEventListener('click', nextSlide);
 prevSlideEl.addEventListener('click', prevSlide);
-
