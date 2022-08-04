@@ -34,3 +34,104 @@ const slides = [
 	},
 ]
 
+const sliderEl = document.querySelector('.slider');
+
+function createListItem(index, srcImage, name, desc){
+	const listItemEl = document.createElement('li');
+	listItemEl.classList.add('slide');
+
+	if(index === 0){
+		listItemEl.classList.add('active');
+	}
+
+	// Img e Div Info Img Out
+	const img = document.createElement('img');
+	img.src = srcImage;
+	const divTextContEl = document.createElement('div');
+	divTextContEl.classList.add('slide__content');
+
+	// Div Info Img In
+	const titleContEl = document.createElement('h3');
+	titleContEl.classList.add('slide__title');
+	titleContEl.innerHTML = name;
+	const subTitleContEl = document.createElement('p');
+	subTitleContEl.classList.add('slide__description');
+	subTitleContEl.innerHTML = desc;
+	
+	divTextContEl.append(titleContEl, subTitleContEl);
+
+	listItemEl.append(img, divTextContEl);
+
+	return listItemEl;
+}
+
+function createList(){
+	const unListEl = document.createElement('ul');
+	unListEl.classList.add('slides-wrapper');
+
+	for(let key in slides){
+		const value = slides[key];
+	
+		const listItem = createListItem(parseInt(key), value.url, value.title, value.description);
+		slideArrayElement.push(listItem);
+		unListEl.append(listItem);
+	}
+
+	return unListEl;
+}
+
+function createArrow(){
+	const arrows = document.querySelector('.arrows');
+	arrows.innerHTML = 
+	`
+		<p class="arrow-prev">
+			<i class="fa-solid fa-chevron-left"></i>
+		</p>
+		<p class="arrow-next">
+			<i class="fa-solid fa-chevron-right"></i>
+		</p>
+  	`;
+  return arrows;
+}
+
+function nextSlide(){
+	const length = slides.length;
+	slideCurrentEl = slideArrayElement[counter];
+    slideCurrentEl.classList.remove('active');
+
+    if(counter < length - 1){
+        counter++;
+    } else {
+        counter = 0;
+    }
+
+    slideNextEl = slideArrayElement[counter];
+    slideNextEl.classList.add('active');
+}
+
+function prevSlide(){
+	const length = slides.length;
+	slideCurrentEl = slideArrayElement[counter];
+    slideCurrentEl.classList.remove('active');
+
+    if(counter > 0){
+        counter--;
+    } else {
+        counter = length - 1;
+    }
+
+    slideNextEl = slideArrayElement[counter];
+    slideNextEl.classList.add('active');
+}
+
+const slideArrayElement = [];
+let counter = 0;
+let slideCurrentEl, slideNextEl;
+
+sliderEl.append(createList(), createArrow());
+
+const nextSlideEl = document.querySelector('.arrow-next');
+const prevSlideEl = document.querySelector('.arrow-prev');
+
+nextSlideEl.addEventListener('click', nextSlide);
+prevSlideEl.addEventListener('click', prevSlide);
