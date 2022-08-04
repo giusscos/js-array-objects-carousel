@@ -36,6 +36,7 @@ const slides = [
 
 const sliderEl = document.querySelector('.slider');
 
+// List Functions
 function createListItem(index, srcImage, name, desc){
 	const listItemEl = document.createElement('li');
 	listItemEl.classList.add('slide');
@@ -80,6 +81,7 @@ function createList(){
 	return unListEl;
 }
 
+// Arrows Functions
 function createArrow(){
 	const arrows = document.querySelector('.arrows');
 	arrows.innerHTML = 
@@ -124,12 +126,15 @@ function prevSlide(){
     slideNextEl.classList.add('active');
 }
 
+
 const slideArrayElement = [];
 let counter = 0;
 let slideCurrentEl, slideNextEl;
 
+// Create Unordered List And Arrows
 sliderEl.append(createList(), createArrow());
 
+// Arrows 
 const nextSlideEl = document.querySelector('.arrow-next');
 const prevSlideEl = document.querySelector('.arrow-prev');
 
